@@ -1,198 +1,159 @@
-// 1. Define Canvas and Interface
+// DEFINE START SCREEN
+
+// DEFINE GAMEPLAY SCREEN
+
 const canvas = document.getElementById('my-canvas');
 const ctx = canvas.getContext("2d");
 const startBtn = document.getElementById("start-button");
 
-// 2. Define Player
+// DEFINE GAME OVER SCREEN
 
-let playerSpeed = 10;
-const playerW = 10;
-const playerH = 10;
 
-// 5. create directional actions (what about mobile?)
-const directionSelect = {
-    ArrowDown: [0, playerSpeed],
-    ArrowUp: [0, -playerSpeed],
-    ArrowRight: [playerSpeed, 0],
-    ArrowLeft: [-playerSpeed, 0],
+
+// DEFINE GLOBAL PARAMETERS
+
+let gridSize = 20;
+
+function randomPosition (min, max) {
+    return Math.round((Math.random() * (max-min) + min) / gridSize) * gridSize;
 }
 
-// Define how the player moves
+let score = 0;
 
-let character = {
-    currentDirection:{x:1, y:0}, 
-    player:[{x:1, y:0}], 
-    victim: {x:0, y:100},
-    playing: false,
-    growing: 0
+let gameOver = false;
+
+// DEFINE PLAYER PARAMETERS
+
+let playerX = randomPosition(0, canvas.width - gridSize);
+let playerY = randomPosition(0, canvas.height - gridSize);
+const playerW = gridSize;
+const playerH = gridSize;
+let speedX = gridSize;
+let speedY = 0;
+
+let player = [{x: gridSize * 4, y: gridSize * 2}];
+
+let drawParts = (eachPart) => {
+    ctx.fillStyle = "gray";
+    ctx.fillRect(eachPart.x, eachPart.y, playerW, playerH);
 }
 
-let command;
+let drawPlayer = () => {
+    player.forEach(drawParts);
 
-let intervalId = 100;
-
-// 6. Create the looper
-
-let looper = () => {
-    // 13. Creates the tail
-    let tail = {};
-    // clonar las position of character in its tail
-    Object.assign(tail, character.player[character.player.length-1]);
-    // make instance of the player head
-    const sq = character.player[0];
-    // 12. create collision conditions
-    let collision = sq.x === character.victim.x && sq.y === character.victim.y;
-    // detect if there is a collition
-    if(detectCollision()) {
-        character.playing = false;
-        reset();
-        console.log("Game Over");
+    // Game Over when touching the walls
+    if (player[0].y < 0 || (player[0].y + gridSize) > canvas.height || player[0].x < 0 || (player[0].x + gridSize) > canvas.width) {
+        gameOver = true;
     }
-    
-    //  reference to the current position
-    let dx = character.currentDirection.x;
-    let dy = character.currentDirection.y;
-    // store new Player's size
-    let playerSize = character.player.length - 1;
-    // Check if game is still running
-    if (character.playing) {
-        // 14. define condition to create tail movement
-        for (let idx = playerSize; idx > -1; idx--) {
-            const sq = character.player[idx];
-            if (idx === 0) {
-                sq.x += dx;
-                sq.y += dy; 
-            } else {
-                sq.x = character.player[idx-1].x;
-                sq.y = character.player[idx-1].y;
-            }
-        }   
-    }
-    
-    // 12.1 validate what happens if there is a collition 
-    if (collision) {
-        character.growing += 10
-        drawNextVictim()
-    }
-
-    if(character.growing > 0) {
-        character.player.push(tail);
-        character.growing -= 10;
-    }
-    // calls animation function to draw elements again
-    requestAnimationFrame(animate);
-    // calls function after interval (in intervalId)
-    setTimeout(looper, intervalId);
-}
-
-let detectCollision = () => {
-    // Detect if collision is with borders
-    const head = character.player[0];
-    if(head.x < 0 || head.x >= canvas.width - playerW || head.y >= canvas.height - playerH || head.y < 0) {
-        return true
-    }
-    // Detect if collision with itself
-    for(let idx = 1; idx < character.player.length; idx++) {
-        const sq = character.player[idx];
-        if(sq.x === head.x && sq.y === head.y) {
-            return true;
+    // Game Over when touching it self
+    for (let i = 4; i < player.length; i += 1) {
+        const collided = player[i].x === player[0].x && player[i].y === player[0].y
+        if (collided) {
+            gameOver = true; 
         }
     }
 }
 
-// 4. Add key event listener for commands
-window.onkeydown = (e) => {
-    // stores in command the new directionSelect
-    command = directionSelect[e.code]
-    // get x and y from command
-    const [x, y] = command;
-    // validate that it cannot come back on the same currentDirection
-    if(-x !== character.currentDirection.x && -y !== character.currentDirection.y) {
-        // asign directionSelect to character
-        character.currentDirection.x = x;
-        character.currentDirection.y = y;
+// DEFINE PLAYER MOVEMENTS
+
+function moveCharacter() {
+    const head = {x: player[0].x + speedX, y: player[0].y + speedY};
+    player.unshift(head);
+    if (player[0].x === foodX && player[0].y === foodY) {
+        gotFood();
+    } else {
+        player.pop();
     }
 }
 
-// 7. Define function to animate and draw on each frame
+function changeDirection(event) {
+    const goingDown = speedY === gridSize;
+    const goingUp = speedY === -gridSize;
+    const goingRight = speedX === gridSize; 
+    const goingLeft = speedX === -gridSize;
+    
+    if (event.code === "ArrowDown" && !goingUp) {
+        speedX = 0;
+        speedY = gridSize;
+    }
+    if (event.code === "ArrowUp" && !goingDown) {
+        speedX = 0;
+        speedY = -gridSize;
+    }
+    if (event.code === "ArrowLeft" && !goingRight) {
+        speedX = -gridSize;
+        speedY = 0;
+    }
+    if (event.code === "ArrowRight" && !goingLeft) {
+        speedX = gridSize;
+        speedY = 0;
+    }
+}
+
+// DEFINE FOOD PARAMETERS
+
+let foodX;
+let foodY;
+
+function randomFood() {
+    foodX = randomPosition(0, canvas.width - gridSize);
+    foodY = randomPosition(0, canvas.height - gridSize);
+    player.forEach(element => {
+        const playerPosition = element.x === foodX && element.y === foodY;
+        if (playerPosition) {
+            randomFood();
+        }
+    });
+}
+
+randomFood();
+
+let drawFood = () => {
+    ctx.fillStyle = "orange";
+    ctx.fillRect(foodX, foodY, gridSize, gridSize); 
+}
+
+function gotFood() {
+    score += 1;
+    randomFood();
+    drawFood();
+    console.log("score: " + score);
+}
+
+// DEFINE ANIMATION
+
+let intervalId;
 
 let animate = () => {
-    // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // ctx.fillStyle = "gray";
-    // create and instance of the player
-    // 16. change players declaration to for loop
-    for (let idx = 0; idx < character.player.length; idx++) {
-        const {x, y} = character.player[idx];
-        drawPlayers("gray", x, y)
-    }
-    const victim = character.victim;
-    // draws a rectangle for the player
-    drawPlayers("red", victim.x, victim.y);
-}
-
-// 8. Define the players (and victim)
-
-let drawPlayers = (color, x, y) => {
-    // assigns color
-    ctx.fillStyle = color;
-    // draws a rectangle for the player
-    ctx.fillRect(x, y, playerW, playerH);
-}
-
-// 9. Creates a random position generator
-
-let randomPosition = () => {
-    let directionArr = Object.values(directionSelect)
-    return {
-        x: parseInt(Math.round(Math.random()*canvas.width / 10) * 10),
-        y: parseInt(Math.round(Math.random()*canvas.height / 10) * 10), 
-        d: directionArr[parseInt(Math.random()*3)]
+    drawFood()
+    moveCharacter()
+    drawPlayer()
+    if (gameOver) {
+        cancelAnimationFrame(intervalId);
+        console.log("Game Over!")
+    } else {
+        intervalId = setTimeout(() => {
+        requestAnimationFrame(animate);    
+    }, 100); 
     }
 }
 
-let drawNextVictim = () => {
-    let nextPosition = randomPosition();
-    let victim = character.victim;
-    victim.x = nextPosition.x;
-    victim.y = nextPosition.y;
-}
-
-// 16. Reset the game
-
-let reset = () => {
-    character = {
-        currentDirection: {x:10, y:0},
-        player: [{x: 10, y:0}],
-        victim: {x: 0, y: 100},
-        playing: false,
-        growing: 0
-    }
-    console.log("reset")
-    position = randomPosition();
-    let player1 = character.player[0];
-    player1.x = position.x;
-    player1.y = position.y;
-    character.currentDirection.x = position.d[0];
-    character.currentDirection.y = position.d[1];
-    // Victim
-    positionVictim = randomPosition();
-    let victim = character.victim;
-    victim.x = positionVictim.x;
-    victim.y = positionVictim.y;
-    character.playing = true;
-}
+// DEFINE GAME EVENTS
 
 let startGame = () => {
-    looper();
+    animate();
 }
 
 
-// 3. When windows loads, function calls the looper
+
 window.addEventListener("load", () => {
-    reset()
+    
 });
 
 startBtn.addEventListener("click", () => {
+    
     startGame();
 });
+
+document.addEventListener("keydown", changeDirection)
