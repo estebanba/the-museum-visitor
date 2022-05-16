@@ -1,10 +1,20 @@
 // DEFINE START SCREEN
 
+const startBtn = document.getElementById("start-button");
+
+function setStartBtn() {
+    startBtn.innerText = "Start Game";
+}
+
 // DEFINE GAMEPLAY SCREEN
 
 const canvas = document.getElementById('my-canvas');
 const ctx = canvas.getContext("2d");
-const startBtn = document.getElementById("start-button");
+
+
+function setResetBtn() {
+    startBtn.innerText = "Restart Game";
+}
 
 // DEFINE GAME OVER SCREEN
 
@@ -145,15 +155,26 @@ let startGame = () => {
     animate();
 }
 
+let restartGame = () => {
+    playerX = randomPosition(0, canvas.width - gridSize);
+    playerY = randomPosition(0, canvas.height - gridSize);
+    speedX = gridSize;
+    speedY = 0;
 
+let player = [{x: gridSize * 4, y: gridSize * 2}];
+}
 
 window.addEventListener("load", () => {
-    
 });
 
 startBtn.addEventListener("click", () => {
-    
-    startGame();
+    if (startBtn.innerText === "Start Game"){
+        startGame();
+        setResetBtn();
+    } else {
+        restartGame();
+        setStartBtn();
+    }
 });
 
 document.addEventListener("keydown", changeDirection)
