@@ -11,25 +11,25 @@ const playerH = 10;
 
 // 5. create directional actions (what about mobile?)
 const directionSelect = {
-    ArrowDown: [0, 1],
-    ArrowUp: [0, -1],
-    ArrowRight: [1, 0],
-    ArrowLeft: [-1, 0],
+    ArrowDown: [0, playerSpeed],
+    ArrowUp: [0, -playerSpeed],
+    ArrowRight: [playerSpeed, 0],
+    ArrowLeft: [-playerSpeed, 0],
 }
 
 // Define how the player moves
 
 let character = {
     currentDirection:{x:1, y:0}, 
-    player:[{x:40, y:0}], 
-    victim: {x:0, y:250},
+    player:[{x:1, y:0}], 
+    victim: {x:0, y:100},
     playing: false,
     growing: 0
 }
 
 let command;
 
-let intervalId = 20;
+let intervalId = 100;
 
 // 6. Create the looper
 
@@ -77,7 +77,7 @@ let looper = () => {
 
     if(character.growing > 0) {
         character.player.push(tail);
-        character.growing -= 1;
+        character.growing -= 10;
     }
     // calls animation function to draw elements again
     requestAnimationFrame(animate);
@@ -128,7 +128,7 @@ let animate = () => {
     }
     const victim = character.victim;
     // draws a rectangle for the player
-    drawPlayers("red", victim.x, victim.y)
+    drawPlayers("red", victim.x, victim.y);
 }
 
 // 8. Define the players (and victim)
@@ -145,8 +145,8 @@ let drawPlayers = (color, x, y) => {
 let randomPosition = () => {
     let directionArr = Object.values(directionSelect)
     return {
-        x: parseInt(Math.random()*canvas.width),
-        y: parseInt(Math.random()*canvas.height), 
+        x: parseInt(Math.round(Math.random()*canvas.width / 10) * 10),
+        y: parseInt(Math.round(Math.random()*canvas.height / 10) * 10), 
         d: directionArr[parseInt(Math.random()*3)]
     }
 }
@@ -162,9 +162,9 @@ let drawNextVictim = () => {
 
 let reset = () => {
     character = {
-        currentDirection: {x:1, y:0},
-        player: [{x: 40, y:0}],
-        victim: {x: 0, y: 250},
+        currentDirection: {x:10, y:0},
+        player: [{x: 10, y:0}],
+        victim: {x: 0, y: 100},
         playing: false,
         growing: 0
     }
@@ -183,11 +183,16 @@ let reset = () => {
     character.playing = true;
 }
 
+let startGame = () => {
+    looper();
+}
 
 
 // 3. When windows loads, function calls the looper
 window.addEventListener("load", () => {
     reset()
-    looper();
 });
 
+startBtn.addEventListener("click", () => {
+    startGame();
+});
