@@ -1,5 +1,6 @@
 body {
     text-align: center;
+    background-color: #f5f2eb;
 }
 
 body h1 {
@@ -8,12 +9,46 @@ body h1 {
     text-align: center;
 }
 
+#game-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 800px;
+}
+
+.central-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+}
+
+.side-panel {
+    width: 200px;
+}
+
 canvas {
-    border: dashed 1px #9b9b9b;
-    background-color: #f9f9f9;
+    border: solid 20px black;
+    background-color: white;
+    visibility: hidden;
+    display: none;
+}
+
+#instructions {
+    width: 300px;
+    display: block;
+    visibility: visible;
+    text-align: justify;
+    font-size: 24px;
+}
+
+#dashboard {
+    visibility: hidden;
 }
 
 body button {
     font-size: 20px;
     margin: 20px;
+    visibility: visible;
 }

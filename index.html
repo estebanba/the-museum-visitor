@@ -4,20 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Museum Visitor</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/style.css">
+    <title>The Museum Visitor</title>
 </head>
 <body>
     <h1>The Museum Visitor</h1>
-
-    <div id="game-board">
-        <canvas id="my-canvas" width="500" height="500"></canvas>
-    </div>
-    
-    <div>
-        <button id="start-button">Start Game</button>
-    </div>
-
+    <section id="game-area">
+        <div class="side-panel">
+        </div>
+        <div class="central-panel" id="game-board">
+            <div id="instructions">
+                <p>
+                    Great! you finally made it to the museum, it's time to apreciate some art. However, you only have a couple of minutes until the museum closes, so hurry up!
+                </p>
+                <p>
+                    Check as many masterpieces as you can, using the arrow keys on your keyboard to move in four directions.
+                </p>
+                <p>
+                    But be careful, museum staff hide in the shadows, ready to kick you out whenever you do something wrong...
+                </p>
+            </div>
+            <canvas id="my-canvas" width="600" height="800"></canvas>
+        </div>
+        <div class="side-panel" id="dashboard">
+            <div>
+                <button class="game-start" id="start-button">Start Game</button>
+            </div>
+            <div>
+                <h3>SCORE</h3>
+                <p id="score">0</p>
+                <h4>HIGHEST SCORE</h4>
+                <p id="hi-score">0</p> 
+            </div>
+        </div>
+    </section>
     <script type="text/javascript" src="/script.js"></script>
 </body>
 </html>
