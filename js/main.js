@@ -90,7 +90,7 @@ gameOver = false;
 
 // DEFINE PLAYER PARAMETERS
 
-const playerImgArray = {a: "/images/player.png", b: "/images/staff.png"};
+const playerImgArray = {a: "images/player.png", b: "images/staff.png"};
 const playerImg = new Image();
 playerImg.src = playerImgArray.a;
 
