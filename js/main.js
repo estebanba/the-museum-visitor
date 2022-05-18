@@ -16,6 +16,13 @@ const ctx = canvas.getContext("2d");
 const theScore = document.getElementById('score');
 const highScore = document.getElementById('hi-score');
 
+let gamePlayScreen = () => {
+    canvas.style.visibility = "visible";
+    canvas.style.display = "block";
+    gameOverGraphics.style.visibility = "hidden";
+    gameOverGraphics.style.display = "none";
+}
+
 function setStopBtn() {
     startBtn.innerText = "Stop Game";
 }
@@ -34,6 +41,20 @@ function drawHiScore() {
 
 // DEFINE GAME OVER SCREEN
 
+const gameOverGraphics = document.getElementById('game-over')
+
+let gameOverScreen = () => {
+    canvas.style.visibility = "hidden";
+    canvas.style.display = "none";
+    gameOverGraphics.style.visibility = "visible";
+    gameOverGraphics.style.display = "block";
+}
+
+let isGameOver = () => {
+    gameOver = true;
+    gameOverScreen();
+}
+
 function setRestartBtn() {
     startBtn.innerText = "Restart Game";
 }
@@ -49,7 +70,7 @@ function randomPosition (min, max) {
 let score = 0;
 let newHiScore = 0;
 
-let gameOver = false;
+gameOver = false;
 
 // DEFINE PLAYER PARAMETERS
 
@@ -59,21 +80,27 @@ let gameOver = false;
 
 let playerX = randomPosition(0, canvas.width - gridSize);
 let playerY = randomPosition(0, canvas.height - gridSize);
-const playerW = gridSize;
-const playerH = gridSize;
+const playerW = gridSize - 5;
+const playerH = gridSize - 5;
 let speedX = gridSize;
 let speedY = 0;
 
-let theHead = {x: playerX, y: playerY};
-let theTailPart = {x: playerX, y: playerY};
+// let theHead = {x: playerX, y: playerY};
+// let theTailPart = {x: playerX, y: playerY};
 
 let player = [{x: playerX, y: playerY}]
 
 let drawParts = (eachPart) => {
     // ctx.drawImage(playerImg, eachPart.x, eachPart.y, playerW, playerH);
     ctx.fillStyle = "#90a4ae";
-    ctx.strokeStyle = "black";
+    
+    // Circle Version
+    // ctx.arc(eachPart.x, eachPart.y, 12.5, 0, Math.PI * 2);
+    // ctx.fill();
+    
+    // Square Version
     ctx.fillRect(eachPart.x, eachPart.y, playerW, playerH);
+    ctx.arcStyle = "black";
     ctx.strokeRect(eachPart.x, eachPart.y, playerW, playerH);
 }
 
@@ -82,16 +109,19 @@ let drawPlayer = () => {
 
     // Game Over when touching the walls
     if (player[0].y < 0 || (player[0].y + gridSize) > canvas.height || player[0].x < 0 || (player[0].x + gridSize) > canvas.width) {
-        gameOver = true;
+        isGameOver();
     }
     // Game Over when touching it self
     for (let i = 4; i < player.length; i += 1) {
         const collided = player[i].x === player[0].x && player[i].y === player[0].y
         if (collided) {
-            gameOver = true; 
+            isGameOver(); 
         }
     }
 }
+
+// const playerPosition = element.x === artX && element.y === artY;
+
 
 // DEFINE PLAYER MOVEMENTS
 
@@ -99,6 +129,22 @@ function moveCharacter() {
     const head = {x: player[0].x + speedX, y: player[0].y + speedY};
     player.unshift(head);
     if (player[0].x === artX && player[0].y === artY) {
+        gotArt();
+    } else if (player[0].x === artX && player[0].y === artY + gridSize) {
+        gotArt();
+    } else if (player[0].x === artX + gridSize && player[0].y === artY) {
+        gotArt();
+    } else if (player[0].x === artX + gridSize && player[0].y === artY + gridSize) {
+        gotArt();
+    } else if (player[0].x === artX + gridSize && player[0].y === artY + (gridSize * 2)) {
+        gotArt();
+    } else if (player[0].x === artX + (gridSize * 2) && player[0].y === artY + gridSize) {
+        gotArt();
+    } else if (player[0].x === artX + (gridSize * 2) && player[0].y === artY + (gridSize * 2)) {
+        gotArt();
+    } else if (player[0].x === artX && player[0].y === artY + (gridSize * 2)) {
+        gotArt();
+    } else if (player[0].x === artX + (gridSize * 2) && player[0].y === artY) {
         gotArt();
     } else {
         player.pop();
@@ -143,10 +189,17 @@ let randomArt = () => {
 
 let artX;
 let artY;
+let artSize = gridSize * 3;
+
+let artLeft = artX;
+let artRight = artX + artSize;
+let artTop = artY;
+let artBottom = artY + artSize;
+
 
 function randomArtPosition() {
-    artX = randomPosition(0, canvas.width - gridSize);
-    artY = randomPosition(0, canvas.height - gridSize);
+    artX = randomPosition(artSize, canvas.width - artSize);
+    artY = randomPosition(artSize, canvas.height - artSize );
     player.forEach(element => {
         const playerPosition = element.x === artX && element.y === artY;
         if (playerPosition) {
@@ -158,7 +211,7 @@ function randomArtPosition() {
 randomArtPosition();
 
 let drawArt = () => {
-    ctx.drawImage(artImg, artX, artY, gridSize, gridSize);
+    ctx.drawImage(artImg, artX, artY, artSize, artSize);
     // ctx.fillStyle = "orange";
     // ctx.fillRect(artX, artY, gridSize, gridSize); 
 }
@@ -204,11 +257,11 @@ let startGame = () => {
 
 let stopGame = () => {
     console.log("Game Stopped")
-    gameOver = true
 }
     
 let restartGame = () => {
     console.log("Game Restarted")
+    gamePlayScreen();
     // reset player
     playerX = randomPosition(0, canvas.width - gridSize);
     playerY = randomPosition(0, canvas.height - gridSize);
