@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <title>The Museum Visitor</title>
 </head>
@@ -23,24 +23,28 @@
                     Check as many masterpieces as you can, using the arrow keys on your keyboard to move in four directions.
                 </p>
                 <p>
-                    But be careful, museum staff hide in the shadows, ready to kick you out whenever you do something wrong...
+                    But be careful, museum staff hides in the shadows, ready to catch if they see bad behaviour...
                 </p>
             </div>
             
-            <canvas id="my-canvas" width="375" height="667"></canvas>
+            <canvas id="my-canvas" width="480" height="640"></canvas>
 
             <div id="game-over">
                 <img src="./images/theScream.jpg" alt="The Scream by Edvard Munch">
-                <h3>You got caught!</h3>
-                <h2>GAME OVER</h2>
+                <div class="message">
+                    <h3>YOU GOT CAUGHT!</h3>
+                    <h2>GAME OVER</h2>
+                </div>
+                
             </div>
             
+            <div>
+                <button class="game-start" id="start-button">Start Game</button>
+            </div>
+
         </div>
         <div class="side-panel" id="dashboard">
             <div>
-                <div>
-                    <button class="game-start" id="start-button">Start Game</button>
-                </div>
                 <div>
                     <h3>SCORE</h3>
                 <p id="score">0</p>

@@ -20,6 +20,10 @@ const ctx = canvas.getContext("2d");
 const theScore = document.getElementById('score');
 const highScore = document.getElementById('hi-score');
 
+let gameMusic = new Audio("../audio/POL-deep-sea-abyss-short.wav");
+    gameMusic.volume = 0.1;
+
+
 let gameScreen = () => {
     instructions.style.visibility = "hidden";
     instructions.style.display = "none";
@@ -31,6 +35,8 @@ let gameScreen = () => {
     canvas.style.display = "block";
     
     dashboard.style.visibility = "visible";
+
+    gameMusic.play()
 }
 
 function setStopBtn() {

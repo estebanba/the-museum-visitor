@@ -41,3 +41,7 @@ _List of tasks in order of priority_
 - [Slides Link](http://slides.com)
 - [Github repository Link](http://github.com)
 - [Deployment Link](https://estebanba.github.io/the-museum-visitor/)
+
+## Credits
+
+- Music: “Deep Sea Abyss”, from PlayOnLoop.com (Licensed under Creative Commons by Attribution 4.0)

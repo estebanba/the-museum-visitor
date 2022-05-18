@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #252525;
     text-align: center;
     background-color: #f5f2eb;
 }
@@ -33,17 +34,22 @@ body h1 {
 }
 
 canvas {
-    border: solid 20px black;
+    border: solid 20px #252525;
     background-color: white;
     visibility: hidden;
     display: none;
 }
 
 #instructions {
-    width: 300px;
-    display: block;
+    width: 380px;
+    height: 540px;
+    padding: 50px;
+    border: solid 20px #252525;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     visibility: visible;
-    text-align: justify;
+    text-align: center;
     font-size: 24px;
 }
 
@@ -63,5 +69,16 @@ body button {
 }
 
 #game-over img {
-    max-height: 700px;
+    height: 640px;
+    width: 480px;
+    border: solid 20px #252525;
+}
+
+#game-over .message {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #f5f2eb;
+    z-index: 200;
 }
