@@ -5,6 +5,10 @@ const centralPanel = document.querySelector(".central-panel");
 const instructions = document.querySelector("#instructions");
 const dashboard = document.querySelector("#dashboard");
 
+let startScreen = () => {
+
+}
+
 function setStartBtn() {
     startBtn.innerText = "Start Game";
 }
@@ -16,11 +20,17 @@ const ctx = canvas.getContext("2d");
 const theScore = document.getElementById('score');
 const highScore = document.getElementById('hi-score');
 
-let gamePlayScreen = () => {
-    canvas.style.visibility = "visible";
-    canvas.style.display = "block";
+let gameScreen = () => {
+    instructions.style.visibility = "hidden";
+    instructions.style.display = "none";
+
     gameOverGraphics.style.visibility = "hidden";
     gameOverGraphics.style.display = "none";
+    
+    canvas.style.visibility = "visible";
+    canvas.style.display = "block";
+    
+    dashboard.style.visibility = "visible";
 }
 
 function setStopBtn() {
@@ -247,11 +257,7 @@ let animate = () => {
 // DEFINE GAME EVENTS
 
 let startGame = () => {
-    instructions.style.visibility = "hidden";
-    instructions.style.display = "none";
-    canvas.style.visibility = "visible";
-    canvas.style.display = "block";
-    dashboard.style.visibility = "visible";
+    gameScreen();
     animate();
 }
 
@@ -261,7 +267,7 @@ let stopGame = () => {
     
 let restartGame = () => {
     console.log("Game Restarted")
-    gamePlayScreen();
+    gameScreen();
     // reset player
     playerX = randomPosition(0, canvas.width - gridSize);
     playerY = randomPosition(0, canvas.height - gridSize);
@@ -279,6 +285,7 @@ let restartGame = () => {
 }
 
 window.addEventListener("load", () => {
+    startScreen();
 });
 
 startBtn.addEventListener("click", () => {

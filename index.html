@@ -10,9 +10,10 @@
 </head>
 <body>
     <h1>The Museum Visitor</h1>
+    
     <section id="game-area">
-        <div class="side-panel">
-        </div>
+        <div class="side-panel"></div>
+
         <div class="central-panel" id="game-board">
             <div id="instructions">
                 <p>
@@ -26,21 +27,26 @@
                 </p>
             </div>
             
-            <canvas id="my-canvas" width="600" height="800"></canvas>
+            <canvas id="my-canvas" width="375" height="667"></canvas>
+
             <div id="game-over">
+                <img src="./images/theScream.jpg" alt="The Scream by Edvard Munch">
                 <h3>You got caught!</h3>
                 <h2>GAME OVER</h2>
             </div>
-            <div>
-                <button class="game-start" id="start-button">Start Game</button>
-            </div>
+            
         </div>
         <div class="side-panel" id="dashboard">
             <div>
-                <h3>SCORE</h3>
+                <div>
+                    <button class="game-start" id="start-button">Start Game</button>
+                </div>
+                <div>
+                    <h3>SCORE</h3>
                 <p id="score">0</p>
                 <h4>HIGHEST SCORE</h4>
                 <p id="hi-score">0</p> 
+                </div>
             </div>
         </div>
     </section>
