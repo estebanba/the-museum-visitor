@@ -20,7 +20,7 @@ const ctx = canvas.getContext("2d");
 const theScore = document.getElementById('score');
 const highScore = document.getElementById('hi-score');
 
-let gameMusic = new Audio("/audio/POL-deep-sea-abyss-short.wav");
+let gameMusic = new Audio("audio/POL-deep-sea-abyss-short.wav");
     gameMusic.volume = 0.1;
 
 
@@ -90,9 +90,9 @@ gameOver = false;
 
 // DEFINE PLAYER PARAMETERS
 
-// const playerImgArray = {a: "/images/player.png", b: "/images/staff.png"};
-// const playerImg = new Image();
-// playerImg.src = playerImgArray.a;
+const playerImgArray = {a: "/images/player.png", b: "/images/staff.png"};
+const playerImg = new Image();
+playerImg.src = playerImgArray.a;
 
 let playerX = randomPosition(0, canvas.width - gridSize);
 let playerY = randomPosition(0, canvas.height - gridSize);
@@ -107,7 +107,7 @@ let speedY = 0;
 let player = [{x: playerX, y: playerY}]
 
 let drawParts = (eachPart) => {
-    // ctx.drawImage(playerImg, eachPart.x, eachPart.y, playerW, playerH);
+    ctx.drawImage(playerImg, eachPart.x, eachPart.y, playerW, playerH);
     ctx.fillStyle = "#90a4ae";
     
     // Circle Version
@@ -115,9 +115,9 @@ let drawParts = (eachPart) => {
     // ctx.fill();
     
     // Square Version
-    ctx.fillRect(eachPart.x, eachPart.y, playerW, playerH);
-    ctx.arcStyle = "black";
-    ctx.strokeRect(eachPart.x, eachPart.y, playerW, playerH);
+    // ctx.fillRect(eachPart.x, eachPart.y, playerW, playerH);
+    // ctx.arcStyle = "black";
+    // ctx.strokeRect(eachPart.x, eachPart.y, playerW, playerH);
 }
 
 let drawPlayer = () => {
