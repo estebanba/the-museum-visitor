@@ -35,8 +35,8 @@ let gameScreen = () => {
     canvas.style.display = "block";
     
     dashboard.style.visibility = "visible";
-
-    gameMusic.play()
+    startBtn.style.visibility = "hidden";
+    
 }
 
 function setStopBtn() {
@@ -44,14 +44,14 @@ function setStopBtn() {
 }
 
 function drawScore() {
-    theScore.innerText = score;
+    theScore.innerText = `(${score})`;
 }
 
 function drawHiScore() {
     console.log(score);
     if (newHiScore < score) {
         newHiScore = score;
-        highScore.innerHTML = newHiScore;
+        highScore.innerHTML = `(${newHiScore})`;
     }
 }
 
@@ -64,6 +64,7 @@ let gameOverScreen = () => {
     canvas.style.display = "none";
     gameOverGraphics.style.visibility = "visible";
     gameOverGraphics.style.display = "block";
+    startBtn.style.visibility = "visible";
 }
 
 let isGameOver = () => {
@@ -234,6 +235,10 @@ let drawArt = () => {
 
 function gotArt() {
     score += 1;
+    if (score === 1){
+        window.alert("You have a security guard behind you! Don't let them catch you!");
+        gameMusic.play()
+    }
     randomArtPosition();
     randomArt();
     drawArt();
@@ -297,9 +302,6 @@ window.addEventListener("load", () => {
 startBtn.addEventListener("click", () => {
     if (startBtn.innerText === "Start Game"){
         startGame();
-        setStopBtn();
-    } else if (startBtn.innerText === "Stop Game") {
-        stopGame();
         setRestartBtn();
     } else if (startBtn.innerText === "Restart Game") {
         restartGame();

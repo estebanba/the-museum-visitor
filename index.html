@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <title>The Museum Visitor</title>
 </head>
@@ -13,7 +13,6 @@
     
     <section id="game-area">
         <div class="side-panel"></div>
-
         <div class="central-panel" id="game-board">
             <div id="instructions">
                 <p>
@@ -22,11 +21,12 @@
                 <p>
                     Check as many masterpieces as you can, using the arrow keys on your keyboard to move in four directions.
                 </p>
+                <img class="keyboard-icon" src="images/keyboard-arrows.png" alt="keyboard arrows">
                 <p>
                     But be careful, museum staff hides in the shadows, ready to catch if they see bad behaviour...
                 </p>
             </div>
-            
+            <button class="game-start" id="start-button">Start Game</button>
             <canvas id="my-canvas" width="480" height="640"></canvas>
 
             <div id="game-over">
@@ -35,23 +35,20 @@
                     <h3>YOU GOT CAUGHT!</h3>
                     <h2>GAME OVER</h2>
                 </div>
-                
             </div>
-            
-            <div>
-                <button class="game-start" id="start-button">Start Game</button>
-            </div>
-
         </div>
         <div class="side-panel" id="dashboard">
-            <div>
+            <div class="art-card">
                 <div>
                     <h3>SCORE</h3>
-                <p id="score">0</p>
-                <h4>HIGHEST SCORE</h4>
-                <p id="hi-score">0</p> 
+                    <p class="card-text" id="score">(0)</p>
+                    <h4>HIGHEST SCORE</h4>
+                    <p class="card-text" id="hi-score">(0)</p> 
+                    <p class="card-text credit">Canvas on HTML. Berlin. 2022</p>
+                    <p class="card-text credit">Courtesy of the web developer</p>
                 </div>
             </div>
+            
         </div>
     </section>
     <script type="text/javascript" src="js/main.js"></script>

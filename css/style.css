@@ -7,22 +7,23 @@ body {
 }
 
 body h1 {
-    margin: 40px;
+    margin: 40px auto 0;
     font-size: 30px;
     text-transform: uppercase;
     text-align: center;
 }
 
 #game-area {
-    margin: 10px;
+    margin: 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    height: 800px;
+    height: 680px;
 }
 
 .central-panel {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,7 +31,9 @@ body h1 {
 }
 
 .side-panel {
-    width: 200px;
+    width: 300px;
+    height: 100%;
+    margin: auto;
 }
 
 canvas {
@@ -38,6 +41,7 @@ canvas {
     background-color: white;
     visibility: hidden;
     display: none;
+    box-shadow: 2px 2px 5px #858383;
 }
 
 #instructions {
@@ -45,22 +49,72 @@ canvas {
     height: 540px;
     padding: 50px;
     border: solid 20px #252525;
+    box-shadow: 2px 2px 5px #858383;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     visibility: visible;
     text-align: center;
     font-size: 24px;
 }
 
-#dashboard {
-    visibility: hidden;
+#instructions p {
+    margin: 20px 20px 20px;
 }
 
-body button {
+.keyboard-icon {
+    width: 100px;
+    display: block;
+    margin: 10px;
+}
+
+#dashboard {
+    /* visibility: hidden; */
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.art-card {
+    height: 90px;
+    width: 200px;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 2px 2px 5px #858383;
+}
+
+.art-card h3, p, h4 {
+    padding: 0;
+    margin: 2px;
+    display: inline-block;
+}
+
+.art-card h4, h4 p {
+    font-style: italic;
+}
+
+.art-card .credit {
+    font-size: 12px;
+}
+
+#start-button {
+    position: absolute;
+    bottom: -10%;
+    right: 13%;
+    height:90px;
+    width: 90px;
+    border: none;
+    border-radius: 50%;
     font-size: 20px;
-    margin: 20px;
+    transform: rotate(-30deg);
+    color: white;
+    margin-bottom: 100px;
     visibility: visible;
+    background-color: #4CAF50;
+    box-shadow: 1px 1px 2px #858383;
 }
 
 #game-over {
@@ -75,10 +129,15 @@ body button {
 }
 
 #game-over .message {
+    font-size: x-large;
     position: absolute;
-    top: 35%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #f5f2eb;
     z-index: 200;
+}
+
+.message h3, h2 {
+    margin: 5px;
 }
