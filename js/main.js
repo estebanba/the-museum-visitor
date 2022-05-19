@@ -9,7 +9,6 @@ let gameMusic = new Audio("audio/2119_art-gallery-ambience-01.mp3");
 gameMusic.volume = 0.3;
 
 let startScreen = () => {
-    
 }
 
 function setStartBtn() {
@@ -27,6 +26,8 @@ let getArtSound = new Audio("audio/1735_woman-saying-wow-01.mp3");
 getArtSound.volume = 0.2;
 
 let gameScreen = () => {
+    gameMusic.play();
+    
     instructions.style.visibility = "hidden";
     instructions.style.display = "none";
 
@@ -303,9 +304,6 @@ let restartGame = () => {
 }
 
 window.addEventListener("load", () => {
-    window.addEventListener('mousemove', () => {
-        gameMusic.play();
-    })
     startScreen();
 });
 
