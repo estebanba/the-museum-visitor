@@ -9,7 +9,7 @@ let gameMusic = new Audio("audio/2119_art-gallery-ambience-01.mp3");
 gameMusic.volume = 0.3;
 
 let startScreen = () => {
-    gameMusic.play();
+    
 }
 
 function setStartBtn() {
@@ -303,6 +303,9 @@ let restartGame = () => {
 }
 
 window.addEventListener("load", () => {
+    window.addEventListener('mousemove', () => {
+        gameMusic.play();
+    })
     startScreen();
 });
 
