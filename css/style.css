@@ -31,9 +31,9 @@ body h1 {
 }
 
 .side-panel {
-    width: 300px;
+    width: calc((100% - 600px) /2);
     height: 100%;
-    margin: auto;
+    margin: 20px;
 }
 
 canvas {
@@ -100,10 +100,19 @@ canvas {
     font-size: 12px;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: red;
+}
+
 #start-button {
     position: absolute;
     bottom: -10%;
-    right: 13%;
+    right: 10%;
     height:90px;
     width: 90px;
     border: none;
@@ -129,6 +138,7 @@ canvas {
 }
 
 #game-over .message {
+    width: 100%;
     font-size: x-large;
     position: absolute;
     top: 25%;

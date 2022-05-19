@@ -5,8 +5,11 @@ const centralPanel = document.querySelector(".central-panel");
 const instructions = document.querySelector("#instructions");
 const dashboard = document.querySelector("#dashboard");
 
-let startScreen = () => {
+let gameMusic = new Audio("audio/2119_art-gallery-ambience-01.mp3");
+gameMusic.volume = 0.3;
 
+let startScreen = () => {
+    gameMusic.play()
 }
 
 function setStartBtn() {
@@ -20,9 +23,8 @@ const ctx = canvas.getContext("2d");
 const theScore = document.getElementById('score');
 const highScore = document.getElementById('hi-score');
 
-let gameMusic = new Audio("audio/POL-deep-sea-abyss-short.wav");
-    gameMusic.volume = 0.1;
-
+let getArtSound = new Audio("audio/1735_woman-saying-wow-01.mp3");
+getArtSound.volume = 0.2;
 
 let gameScreen = () => {
     instructions.style.visibility = "hidden";
@@ -57,7 +59,10 @@ function drawHiScore() {
 
 // DEFINE GAME OVER SCREEN
 
-const gameOverGraphics = document.getElementById('game-over')
+const gameOverGraphics = document.getElementById('game-over');
+
+let gameOverSound = new Audio("audio/277403__landlucky__game-over-sfx-and-voice.wav");
+gameOverSound.volume = 0.3;
 
 let gameOverScreen = () => {
     canvas.style.visibility = "hidden";
@@ -70,6 +75,7 @@ let gameOverScreen = () => {
 let isGameOver = () => {
     gameOver = true;
     gameOverScreen();
+    gameOverSound.play();
 }
 
 function setRestartBtn() {
@@ -234,11 +240,12 @@ let drawArt = () => {
 }
 
 function gotArt() {
+    getArtSound.play();
     score += 1;
     if (score === 1){
         window.alert("You have a security guard behind you! Don't let them catch you!");
-        gameMusic.play()
     }
+    getArtSound.play();
     randomArtPosition();
     randomArt();
     drawArt();
