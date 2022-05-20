@@ -78,6 +78,20 @@ canvas {
     text-align: left;
 }
 
+.sound-btn {
+    border: none;
+    margin-bottom: 10px;
+}
+
+.sound-btn img {
+    width: 30px;
+}
+
+#on-btn {
+    visibility: hidden;
+    display: none;
+}
+
 .art-card {
     height: 90px;
     width: 200px;

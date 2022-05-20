@@ -5,6 +5,9 @@ const centralPanel = document.querySelector(".central-panel");
 const instructions = document.querySelector("#instructions");
 const dashboard = document.querySelector("#dashboard");
 
+const soundOn = document.getElementById("on-btn");
+const soundMute = document.getElementById("mute-btn");
+
 let gameMusic = new Audio("audio/2119_art-gallery-ambience-01.mp3");
 gameMusic.volume = 0.3;
 
@@ -313,9 +316,28 @@ startBtn.addEventListener("click", () => {
         setRestartBtn();
     } else if (startBtn.innerText === "Restart Game") {
         restartGame();
-        setStopBtn();
+        // setStopBtn();
     }
 });
 
 document.addEventListener("keydown", changeDirection)
 
+soundOn.addEventListener("click", () => {
+    gameMusic.volume = 0;
+    gameOverSound.volume = 0;
+    getArtSound.volume = 0;
+    soundOn.style.visibility = "hidden";
+    soundOn.style.display = "none";
+    soundMute.style.visibility = "visible";
+    soundMute.style.display = "block";
+});
+
+soundMute.addEventListener("click", () => {
+    gameMusic.volume = 0.2;
+    gameOverSound.volume = 0.2;
+    getArtSound.volume = 0.2;
+    soundOn.style.visibility = "visible";
+    soundOn.style.display = "block";
+    soundMute.style.visibility = "hidden";
+    soundMute.style.display = "none";
+});
