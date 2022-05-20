@@ -42,9 +42,9 @@ let gameScreen = () => {
     
 }
 
-function setStopBtn() {
-    startBtn.innerText = "Stop Game";
-}
+// function setStopBtn() {
+//     startBtn.innerText = "Stop Game";
+// }
 
 function drawScore() {
     theScore.innerText = `(${score})`;
@@ -203,7 +203,7 @@ function changeDirection(event) {
 
 const artImg = new Image();
 
-let artArray = ["images/1.png", "images/2.png", "images/3.png", "images/4.png", "images/5.png", "images/6.png", "images/7.png"];
+let artArray = ["images/1.png", "images/2.png", "images/3.png", "images/4.png", "images/5.png", "images/6.png", "images/7.png", "images/8.png", "images/9.png", "images/10.png", "images/11.png", "images/12.png", "images/13.png", "images/14.png", "images/15.png", "images/16.png", "images/17.png"];
 
 artImg.src = artArray[parseInt(Math.random() * (artArray.length))];
 
@@ -280,9 +280,9 @@ let startGame = () => {
     animate();
 }
 
-let stopGame = () => {
-    console.log("Game Stopped")
-}
+// let stopGame = () => {
+//     console.log("Game Stopped")
+// }
     
 let restartGame = () => {
     console.log("Game Restarted")

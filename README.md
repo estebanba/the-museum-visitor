@@ -19,29 +19,79 @@ The game ends whenever the player crashes against one of the four walls of the r
 
 ## Backlog
 
-_List of features you might implement after the MVP_
+- Bigger paintings (pictures)
+- Activate / deactivate sound
 
 ## Data structure
 
--
+### Build Screens
 
-## States y States Transitions
+- startScreen()
+- setStartBtn()
+
+- gameScreen()
+- drawScore()
+- drawHighScroe()
+
+- gameOverScreen()
+- isGameOver()
+- setRestartBtn()
+
+### Global Parameters
+
+- randomPosition()
+
+### Player
+
+- drawParts()
+- drawPlayer()
+- moveCharacter()
+- changeDirection()
+
+### The Art
+
+- randomArt()
+- randomArtPosition()
+- drawArt()
+
+### Game
+
+- animate()
+- startGame()
+- restartGame()
+
+## States y States Transitions Functions
 
 - startScreen
 - gameScreen
 - gameOverScreen
 
-## Task
+## Tasks
 
-_List of tasks in order of priority_
+- Dom
+- Start screen
+- Canvas
+- Interface elements
+- Event Listeners
+- Player parts
+- Canvas animation
+- Player drawing
+- Player movement
+- Player growing
+- Art drawing
+- Art drawing random image
+- Art drawing random position
+- Art regeneration
+- Art new position randomization
+- Game Over screen
+- Restart functionality
+- Score
+- Highscore
+- Styling
+- Music and Sounds
 
 ## Links
 
-- [Trello Link](https://trello.com)
-- [Slides Link](http://slides.com)
-- [Github repository Link](http://github.com)
+- [Slides Link](https://docs.google.com/presentation/d/1tSAvRVX4xd_4RpUuZ46hdHM9TWx0E94PeJHiooeXWfs/edit#slide=id.g12c83e1429a_0_10)
+- [Github repository Link](https://github.com/estebanba/the-museum-visitor)
 - [Deployment Link](https://estebanba.github.io/the-museum-visitor/)
-
-## Credits
-
-- Music: “Deep Sea Abyss”, from PlayOnLoop.com (Licensed under Creative Commons by Attribution 4.0)
